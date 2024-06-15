@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile.pg
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: tahakhan
+      POSTGRES_DB: email
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

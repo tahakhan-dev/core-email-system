@@ -1,0 +1,15 @@
+version: '3.5'
+services:
+  nest-backend:
+    container_name: nest-app
+    image: nest-api
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    volumes:
+      - ./src:/app/src
+    restart: unless-stopped

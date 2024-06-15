@@ -1,0 +1,135 @@
+/* DemoDashboard.css */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+  position: relative; /* For positioning the logout button */
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.connect-button {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.connect-button:hover {
+  background-color: #0056b3;
+}
+
+.logout-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
+}
+
+.table-container {
+  width: 100%; /* Ensure container takes full width */
+  overflow-x: auto; /* Allow horizontal scrolling */
+  margin-top: 20px;
+}
+
+.emails-table {
+  width: 80%;
+  max-width: 100%; /* Ensure the table doesn't exceed container width */
+  border-collapse: collapse;
+}
+
+.emails-table th,
+.emails-table td {
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.emails-table th {
+  background-color: #f2f2f2;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.emails-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.emails-table tr:hover {
+  background-color: #ddd;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-number {
+  padding: 8px 12px;
+  margin: 0 5px;
+  cursor: pointer;
+  border: 1px solid #007bff;
+  background-color: white;
+  color: #007bff;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.page-number.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.page-number:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid blue;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.emails-table tr.unread {
+  background-color: #e0e0e0; /* Light gray for unread emails */
+}
+
+.emails-table tr.read {
+  background-color: #ffffff; /* White for read emails */
+}

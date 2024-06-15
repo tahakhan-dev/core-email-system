@@ -1,0 +1,639 @@
+{
+	"info": {
+		"_postman_id": "6225ed87-b57b-44da-87ec-97fdd8d75092",
+		"name": "Email Core System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26053039"
+	},
+	"item": [
+		{
+			"name": "microsoft live apis",
+			"item": [
+				{
+					"name": "Get Refresh Token MS",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Version",
+								"value": "1",
+								"disabled": true
+							},
+							{
+								"key": "deviceId",
+								"value": "ABCD1234563",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "46bcbe3d-0549-4f8d-9238-a4fb3fd6f8b9",
+									"type": "text"
+								},
+								{
+									"key": "refresh_token",
+									"value": "M.C505_BAY.0.U.-CoViIRIZEtgIxJaHfiJzOsK2apKiI5qLBpbTxkca*omFamg5RhIvZyuFyO0ZjRg04kQNpoHQRKzKEAIj8KlHuBkEBgvtlSp1jvk6f5VIKqGHva2cL6IxYzZaU53sTUfJ7XdYMzZgpaFy4wpj7UZ46l3pWpSzvHOr!uH7wOzk*36JrnF7sNlhAaMsAsSUNKj6eM61P6amSYOk4JqxudPsMppfTIBdluMkLfjLkggMXJsoKWQ!2QygPTZeFSEKME7uOj0o*org6YQdLYqB1Og8FypadAJ3oO5wyi!w23sx!H*nD6M5IxMlDjqWG3uRtTYrJisH7EuSYgtNoEXJXtw2DuHaK2eNP9KQ5UpSktzs*GxnpbAcI9!Uf0rLWkNlRuXlJ5vr*6bDqkTWhZLFHxCbh*4mbvlWF6D!ZniBiEFpmIOOfYOcBeoVmaWScccB6L5m*w$$",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost:3000/api/user/outlook/redirect",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+							"protocol": "https",
+							"host": [
+								"login",
+								"microsoftonline",
+								"com"
+							],
+							"path": [
+								"common",
+								"oauth2",
+								"v2.0",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Microsoft Email Using Access Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "EwCIA8l6BAAUbDba3x2OMJElkF7gJ4z/VbCPEz0AAfDH/7CJXS4PY/QsUmaESc4byt+lCEbpOeMJmjmBqQRptFHDRfhYoPJCaXXyi1mr65GZTTXQm5h8ZaSzzQ3p8LwYY5ojo/SUHlhyXv7erw3LzqS6b7O5Jbp9nj5lbJ1zaSpVeErBepthKedqTZ6YfX9ptiwrhUiL4hb9+FpZVSFiZiUJn2LNDsNTJjecYUDybifyhk1BtW5SQtN8DdA/kvmOyYGIPqJRPSCv5VjEc3/STF9VWAxbODXgl5kn8kxfLykM9O1FFLuZNqEINIy/QBBM59kvdOfoiP2beEYkRI/ps1C9pipPUPj9nsW6qba7Z54nk0C01XOh6rhPXCfxB5EDZgAACABy/q8EN5nKWAKLfLmrGwARLuvYwyih83NavyqftEpqVMWPPgnHadaBR8Jyzg3634Hq0KsMhBj3riX86KGSMsalZr6ryZRXkooZFrCGBq0g0cbt46ltSo06Mr1UARNRnDQuXwcUD4sESqYGPLsVqyag5uwTNgjc+M8GpETnU1qB+rdqf0h3LfNUxieV8fXKcnI57nOJmAtsMKYJ8uaCHY4vBQKd58RYLtc79uGZHIQgPs53DymGANcYuKxmiytY3Lr/IJZVN3z0io62u7exgiVcwpR4ZRW5p1zpLHotb8L7LLnJFFjUsxGYrZ21i2CBIq4J9jGkjcAGubVi6zQEvEE55kgJFaeGr6ICKGdse3y+yeN98NuLFjGObXj1rx1qHgywKR5iQtXoVborUaWapZdcaEY1tNqBBa+oFh7Pbe8O4hB6XKzwmvny7CuqGYMRC8uyW9aR3ZWpZLXCogSLS09lE31mGaKmSUMxBC3sfWU9bNka6EYdP9nG+fy7YTDz0xlxKh7bjZb3l6dpALnJm77iexQuiDufUmgxhWO3gGLNHj3Be7gCo7ULoIQp5wFXLWkKr7qR/zCa84GCszAqu8g5BTPXly7D2mnoo9cvAmghpneAQ0Fp3EYy7MMNJWYsjCvhLKCxLRU6xOJph5ay3j9t6llvnp03HCociYX9DpJdiuBdb4VG76dfqNoGo5Ea+wEM0cKs5QtBXHelbwNsLlJtdSYKEapYqWf/ZRI6jY7vpgWM9cMNBbdI1Ztzpn5bUprnO/VILSFciCviDuBxSKRyXpQ0FmRyisz+f1gXc85QBI2bAg==",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/me/messages",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"me",
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create live MS Subscription",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer EwCIA8l6BAAUbDba3x2OMJElkF7gJ4z/VbCPEz0AAa9pWFOaC8DSxTj85260ZxaCoWgmp7yoAj7B/Ew+30VkDHZPhA0Bx7cxpqhd0nheiBGAZQs4S9eLEJGy7wj/zXFsIwmAtLz+fYW0E8U2MFPOm7zGdvCs9wLWzONb9ELYxtDW/fj581btp28ZhKm7lMBjVl++AvD7GVW5lkTnhEUPG5EpuGlh7ncScY1JRB9U3O1Dc9B27p1u7yyS+M/Oz2lZsBNCYfQv7pzp6pvTobZYF4oj7dSFyodic1VSBNLC7HTfxR42UBc2mTVw/Rr3nuvGEldm3PfcT3xUB4dHUIjeFYa6/08blhvA+X9OZBPlvFvtM/5nqFsPb9ZpWNWlmTQDZgAACG3TlgWyKddsWAJnapuqza6tmv6P+O5YIgGJFclVW8N9bY9UTiDCd0qO8NF57CmQr7YEtLHu7gjp9xZ/TsgpVYp6rQxcY/B0jq3ZXGQhmg+fb6hE1XauHgOKC0D8JuQrvQb/LaidWSyyn3ReeL40pbRp2rredLYzzb0Q7OawRaUqeM2fgEKxah6lFsYa9VfwS4mO7XD+e7yoiTb6k2BTgsLA+U6wK9reUCgoUX7LZA1JGE18A+hxvkTpNQUPtnxa47C3a45SKzwKpGgSFDp5rN6GeYz6imVC9DXT3sIbLrEu+BBYoT7eTnzl0LRsy0WR0CZ7oAcIvgsbENIzRoC8FwsamvLedyagZZN5ujeMXM69G34/eeNIB6xdR/nd21Sbd3NbV5NLb+L+Z47coS93CJJjhAgsR0HlsZqdNaN3eHqWu5tSz5sUk5GwVDbloDgkDOWMLzzm/6eIJlJWiEUF2FHBJ1LqWkUC/+PB+PvqefrP5JYXNu40DbFh/emNLNwx5uNE7LT97ovWYfPDJuQuEwnh9doBK1Fyl4up73k7VC1rs3AlFTzIU7vUlcz7ktsYaNK/JvNky7QwegE2kwAjS/ZsM+InUCqKqRmv7E535kZyuA1CpfW3Yew2ISbOr7wXcWgVZrltGaxK4J99c4ByQl7WWpu9kpuRdYlPlvYZA0KyMzz4DbVeJFoWLE9x1eLKfI30aNKQJBqx0Pcvq/HjAUKHUBrq9Z6mSNKeNaljx326BETbLiHFwMnnYj+pcpNvB9muxKocEOmhf2XXNHiYaKXHrtCxC5zh4I48TPAqMRFjz7+bAg=="
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n    \"changeType\": \"created\",\n    \"notificationUrl\": \"https://2a74-119-73-96-136.ngrok-free.app/api/email/create\",\n    \"resource\": \"me/mailFolders/inbox/messages\",\n    \"expirationDateTime\": \"2024-06-09T18:51:07.272Z\", // Example date; set to 1 hour from the current time\n    \"clientState\": \"12\"\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/subscriptions",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"subscriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get EMAIL by ID live MS",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "EwCIA8l6BAAUbDba3x2OMJElkF7gJ4z/VbCPEz0AAZ7jeg+F4t592yrsmBkjIlxRYkZXGCUSHHgYv+AfPmZRor2o3MMO7kKuPKrefArYYswJFk6FRS5Ob0EaoDH+eDhOexxZ94/Njp9sWvWfdhVfdVr4+gg4+q2zwbky6X+/RcmAY7Hrt/nebDdbdb7If9K5qE/wlriuLrU0YVzJDbkPNHCNOKVVYjxrUb1E4EGrVKhE5ZA8DZEQKfaWDHIhyu6LRobUeRnQLl0qHZK5EyfouuBlJvjnTK8cSPFAZ4cJ1ttREr2an4QNc89Omr7+xuGLNQVHJJtfBgalVihrICJUIqg+fn9DDM8W52v7vSfTlbexjji96ry7JHGU8o8o0YoDZgAACL9Wk7q3igUtWAISuHqwxguA43M6G2vzDQhCYkkCSEfjyeOh31+1lJuIADIXFBF/xGsygcbTythtHwJxWG8pIe3spEXqJ5zy3IDv2FZ04/fTZabHJ/W203bgFCGb8kLMwgunxgSF+geBuN0F+ZmY9uQ9DyAsS02sEJ3dGxK45jElZEWhUdOWIvaG6BdKRcVO9nIstEZZjQnquz85K2oC/yHJIanQoYke1l+z+EugjjSnT97srg7NgkhFV35VMLYWIAeUpV9Y2Cjhx2yn9cExRXg+JrbUhZfj51Ph/CpyHBUv2W3wihxiIeMHl8v9ueGQxQ0jcYQQUWsQbQlHTgxWsx7vKs44htjaWiiBUE/8P542r/RNjicqbIZIdRq5E7hqCC/Swb2UzRJXXXTzJiyzAUVN81iVP6NVb8NQoxf+iYATeyUuqxGJ/B81nyZXKO2zxIsoCN/IK1+lmzSvRyDt+22P/2HKBJaHbe08Ff160xxl/2TcxTWk8o5Y5SY5KzyszO9kPPOypR2ewbdFCCf6QhsdQC3DF/Gxyo612dfQajIKwYJff6bL3kyEcu0dUMECU4J69Ji9nej3yydbRllTjXTmOOvzQTuRVz6nyu8X0NUZ+6qfwjCaVHAsJWl2zU6plvNCGUSVtgP+yOEvBprzT23mVtYcIfPfLdRz6NIQtldIbd7yokuXqg1yGY237ZQFheNQ1tBRddaXu/bGC/NNetMK5aJ2jJWqjCa8S34mx9zOfo9WHGWHvPuYbyvpmVu7uJwV/u42f5srZ1Nm9tIyuvvnoiS5UHAHMGv+T4zDwJuJkFWbAg==",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\"changeType\": \"updated\",\n    \"notificationUrl\": \"https://b021-119-73-96-136.ngrok-free.app/api/email/create\",\n    \"resource\": \"me/mailFolders/inbox/messages\",\n    \"expirationDateTime\": \"2024-06-09T12:00:00.000Z\", // Example date; set to 1 hour from the current time\n    \"clientState\": \"secretClientValue\"\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/me/messages/AQMkADAwATMwMAItNjlhZi1mZgAzNy0wMAItMDAKAEYAAAPy04Nmpo1QRrLlhN4lfcaUBwD7Sw9VqBK8QI5wYt5wefg0AAACAQwAAAD7Sw9VqBK8QI5wYt5wefg0AAAAf9e3nwAAAA==",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"me",
+								"messages",
+								"AQMkADAwATMwMAItNjlhZi1mZgAzNy0wMAItMDAKAEYAAAPy04Nmpo1QRrLlhN4lfcaUBwD7Sw9VqBK8QI5wYt5wefg0AAACAQwAAAD7Sw9VqBK8QI5wYt5wefg0AAAAf9e3nwAAAA=="
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sign Up",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-API-Version",
+						"value": "1"
+					},
+					{
+						"key": "deviceId",
+						"value": "ABCD123456"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\":\"mtahakhan.dev\",\n    \"email\":\"mtahakhan.dev@outlook.com\",\n    \"password\":\"1122334455\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/user/signUp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"signUp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-API-Version",
+						"value": "1"
+					},
+					{
+						"key": "deviceId",
+						"value": "ABCD1234563"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"mtahakhan.dev@outlook.com\",\n    \"password\":\"1122334455\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInVzZXJOYW1lIjoibXRhaGFraGFuLmRldiIsImVtYWlsIjoibXRhaGFraGFuLmRldkBvdXRsb29rLmNvbSIsImlhdCI6MTcxODM5NjI2MywiZXhwIjoxNzE4NjU1NDYzLCJpc3MiOiJBQkNEMTIzNDU2MyIsInN1YiI6IjEzIEF1dGhlbnRpY2F0aW9uIFRva2VuIn0.qb0vJrE56Pa9FXvu9OyPht2XBPZ7G4GRltXCHbiJe-c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-Version",
+						"value": "1"
+					},
+					{
+						"key": "deviceId",
+						"value": "ABCD1234563"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/user/getUserProfile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"getUserProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Redirect To Microsoft Account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInVzZXJOYW1lIjoibXRhaGFraGFuLmRldiIsImVtYWlsIjoibXRhaGFraGFuLmRldkBvdXRsb29rLmNvbSIsImlhdCI6MTcxODM3MjQ1MSwiZXhwIjoxNzE4NjMxNjUxLCJpc3MiOiJBQkNEMTIzNDU2MyIsInN1YiI6IjEzIEF1dGhlbnRpY2F0aW9uIFRva2VuIn0.NbkZyEzDBeZ4Rq52bJdAOcGJQUycCKTvuhHrPr0DM5Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-Version",
+						"value": "1"
+					},
+					{
+						"key": "deviceId",
+						"value": "ABCD1234563"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/user/redirectToMicrosoft",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"redirectToMicrosoft"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Local refresh token MS L",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInVzZXJOYW1lIjoibXRhaGFraGFuLmRldiIsImVtYWlsIjoibXRhaGFraGFuLmRldkBvdXRsb29rLmNvbSIsImlhdCI6MTcxNzUwOTkxMCwiZXhwIjoxNzE3NzY5MTEwLCJpc3MiOiJBQkNEMTIzNDU2MyIsInN1YiI6IjEyIEF1dGhlbnRpY2F0aW9uIFRva2VuIn0.LcjmowScy_ZFYf6YQ9U-v3kXag2wya6yGlaW0CEUezs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-Version",
+						"value": "1"
+					},
+					{
+						"key": "deviceId",
+						"value": "ABCD1234563"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/user/outlook/refreshToken?refresh_token=M.C505_BL2.0.U.-ChNWxvA6RgP3KSml47*!r*McE2v2iRC071Sv15kK8jvJNMegAOsYlcT7N7mvDF6jZ0bTN17QrOefl6zCpLpXfdv5qtTXlqz9Ya6vYZB0m5ZSG7KQeakshatTaQod3hcT4LGzMfqBZXEdi*KnF2wTrBN!EDqL1pP9O8SjYoNpniz4caRZxUQFDbHIJ9TOkONSyIXXxcJ31coQcqd0Lya0Se15MEa!tI02tofXxs01p0wCqysTjPd3PPenDHtIwcjhCuY1bPDDK8wPwhI5RXMrV!r69xTaeM8lQ8f5ZJrjBdFsPFLrjKxFYWYbh8BL*zxZZLVJuNoY3d!9v1C98FgGMU3YBcsAlUx0P03dzFJ8NKvCfr015JCQsYfrWCZDPdKfp4kK!PeGcF9sm*ryylBpHtRPm4YaRHCs2AHAiOkg8GDXXvq9zMt5QlQQxh070GDYjA$$",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"outlook",
+						"refreshToken"
+					],
+					"query": [
+						{
+							"key": "refresh_token",
+							"value": "M.C505_BL2.0.U.-ChNWxvA6RgP3KSml47*!r*McE2v2iRC071Sv15kK8jvJNMegAOsYlcT7N7mvDF6jZ0bTN17QrOefl6zCpLpXfdv5qtTXlqz9Ya6vYZB0m5ZSG7KQeakshatTaQod3hcT4LGzMfqBZXEdi*KnF2wTrBN!EDqL1pP9O8SjYoNpniz4caRZxUQFDbHIJ9TOkONSyIXXxcJ31coQcqd0Lya0Se15MEa!tI02tofXxs01p0wCqysTjPd3PPenDHtIwcjhCuY1bPDDK8wPwhI5RXMrV!r69xTaeM8lQ8f5ZJrjBdFsPFLrjKxFYWYbh8BL*zxZZLVJuNoY3d!9v1C98FgGMU3YBcsAlUx0P03dzFJ8NKvCfr015JCQsYfrWCZDPdKfp4kK!PeGcF9sm*ryylBpHtRPm4YaRHCs2AHAiOkg8GDXXvq9zMt5QlQQxh070GDYjA$$"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sync Email",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInVzZXJOYW1lIjoibXRhaGFraGFuLmRldiIsImVtYWlsIjoibXRhaGFraGFuLmRldkBvdXRsb29rLmNvbSIsImlhdCI6MTcxODQ1MzE4NiwiZXhwIjoxNzE4NzEyMzg2LCJpc3MiOiJBQkNEMTIzNDU2MyIsInN1YiI6IjEzIEF1dGhlbnRpY2F0aW9uIFRva2VuIn0.loRGm_MCBek8lYAuqE39K8qoc-GCZpgmyoPIsMMkudk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "deviceId",
+						"value": "ABCD1234563"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/user/outlook/syncEmail",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"outlook",
+						"syncEmail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All User Email",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInVzZXJOYW1lIjoibXRhaGFraGFuLmRldiIsImVtYWlsIjoibXRhaGFraGFuLmRldkBvdXRsb29rLmNvbSIsImlhdCI6MTcxODM4NTU5MywiZXhwIjoxNzE4NjQ0NzkzLCJpc3MiOiJBQkNEMTIzNDU2MyIsInN1YiI6IjEzIEF1dGhlbnRpY2F0aW9uIFRva2VuIn0.Hv9sNfN2rdARxnaMDGaA4tScG1f4VXURyvuXDsnyZ8s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "deviceId",
+						"value": "ABCD1234563"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/api/email/getAllUserEmail",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"email",
+						"getAllUserEmail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get single email",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInVzZXJOYW1lIjoibXRhaGFraGFuLmRldiIsImVtYWlsIjoibXRhaGFraGFuLmRldkBvdXRsb29rLmNvbSIsImlhdCI6MTcxNzgzOTkwNiwiZXhwIjoxNzE4MDk5MTA2LCJpc3MiOiJBQkNEMTIzNDU2MyIsInN1YiI6IjEyIEF1dGhlbnRpY2F0aW9uIFRva2VuIn0.mcULi7S8dXBgYTu7ej1c-1pogmG3VUWkLePt4BKL_mM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "deviceId",
+						"value": "ABCD1234563"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/api/email/getUserEmailById?emailId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"email",
+						"getUserEmailById"
+					],
+					"query": [
+						{
+							"key": "emailId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User Email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:3001/api/email/created?validationToken=sdfsdfdf",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"email",
+						"created"
+					],
+					"query": [
+						{
+							"key": "validationToken",
+							"value": "sdfsdfdf"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Email Subscriptions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInVzZXJOYW1lIjoibXRhaGFraGFuLmRldiIsImVtYWlsIjoibXRhaGFraGFuLmRldkBvdXRsb29rLmNvbSIsImlhdCI6MTcxNzk1MzkzMSwiZXhwIjoxNzE4MjEzMTMxLCJpc3MiOiJBQkNEMTIzNDU2MyIsInN1YiI6IjEyIEF1dGhlbnRpY2F0aW9uIFRva2VuIn0.sjj3KazRbEPKDt69DQtcQbQTNCXUQVzrALt3uqgZBaY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-API-Version",
+						"value": "1"
+					},
+					{
+						"key": "deviceId",
+						"value": "ABCD1234563"
+					},
+					{
+						"key": "Authorization",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/api/email/subscription?status=created",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"email",
+						"subscription"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "created"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User Email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/email/updated",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"email",
+						"updated"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User Email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/email/deleted",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"email",
+						"deleted"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

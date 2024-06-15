@@ -1,0 +1,30 @@
+version: "3.5"
+
+services:
+  nest-producer-backend:
+    container_name: nest-consumer-producer
+    image: nest-producer
+    build:
+      dockerfile: Dockerfile
+      context: ./core-email-producer
+    ports:
+      - 3000:3000
+    env_file:
+      - core-email-producer/.env
+    volumes:
+      - ./core-email-producer/src:/app/src
+    restart: unless-stopped
+
+  nest-backend:
+    container_name: nest-app-consumer
+    image: nest-consumer
+    build:
+      dockerfile: Dockerfile
+      context: ./core-email-consumer
+    ports:
+      - 3001:3001
+    env_file:
+      - ./core-email-consumer/.env
+    volumes:
+      - ./core-email-consumer/src:/app/src
+    restart: unless-stopped

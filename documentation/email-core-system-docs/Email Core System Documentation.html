@@ -1,0 +1,878 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Email Core System Documentation</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4b850950-d946-4dde-b2fd-b79bdc13cdab" class="page sans"><header><h1 class="page-title">Email Core System Documentation</h1><p class="page-description"></p></header><div class="page-body"><p id="55117ecd-aa4e-4d3f-824a-33cd2328d698" class="">
+</p><h2 id="b4c26e74-c625-4e38-8d9d-d6422399bdd4" class=""><strong>Architecture Diagram:</strong></h2><figure id="c58017c9-69eb-47ef-9117-ca806e086fb7" class="image"><a href="Email%20Core%20System%20Documentation%20Images/email-core-system_(1).jpg"><img style="width:480px" src="Email%20Core%20System%20Documentation%20Images/email-core-system_(1).jpg"/></a></figure><h3 id="05ee8c29-7f0d-4e1d-aff9-f5cb68b89bf0" class="">Database Schema:</h3><figure id="142bba68-cf7c-47ad-8c89-d101d2658d82" class="image"><a href="Email%20Core%20System%20Documentation%20Images/database_schema.jpg"><img style="width:576px" src="Email%20Core%20System%20Documentation%20Images/database_schema.jpg"/></a></figure><h3 id="5a5c3cf8-24a6-4aa2-b927-e1700ade2669" class="">Technologies: </h3><p id="f5ce06c9-d630-4c4b-ad52-a720ffe5b436" class="">Node Js, Typescript, Nest Js, React Js, Kafka, PostgresSQL, Docker, Azure</p><h3 id="b355f8db-6149-48f0-882e-f38498725c6d" class=""> Project Overview:</h3><p id="8797b75c-32dc-4f8a-ac3f-f79824543b35" class="">This core system is designed to serve as an email client, offering essential functionalities. It facilitates connectivity with user email accounts, with a primary focus on Outlook, and efficiently manages email data.</p><h3 id="47de26fb-b804-4d7a-ac84-5422f86b2896" class="">Architecture Overview:</h3><ul id="df65ebe0-c868-4687-a38e-a480c671b837" class="bulleted-list"><li style="list-style-type:disc">I&#x27;ve opted for Node.js as the runtime environment, leveraging TypeScript as the programming language within the NestJS framework. Node.js is chosen for its efficiency in handling I/O operations, making effective use of the event loop mechanism.</li></ul><ul id="1129218e-d302-4419-ae95-0af9f4fd2082" class="bulleted-list"><li style="list-style-type:disc">I&#x27;ve implemented the CQRS pattern along with the repository pattern in my project. The reason for choosing CQRS was to separate read and write operations; <em><mark class="highlight-red"><strong><span style="border-bottom:0.05em solid">ideally, I wanted to utilize a master-slave database setup where read operations would use the slave database and write operations the master. However, due to time constraints</span></strong></mark></em>, I ended up solely implementing the CQRS pattern with the repository pattern handling all database logic. Additionally, NestJS inherently follows the singleton pattern, which was also leveraged in my project</li></ul><ul id="a643e8fb-28cb-492a-b2ab-86dc458eef58" class="bulleted-list"><li style="list-style-type:disc">I&#x27;ve developed a custom JWT mechanism for authentication in my application. Additionally, for Outlook verification, I&#x27;ve integrated OAuth Outlook authentication, allowing me to obtain access and refresh tokens. These tokens are then used to fetch emails from the Microsoft server.</li></ul><ul id="5335d289-c973-4d0a-bb36-e4997adb5a78" class="bulleted-list"><li style="list-style-type:disc">I&#x27;ve implemented a consumer-producer model along with Kafka to streamline processes. By scaling up the number of consumers, tasks can be processed in parallel, resulting in faster completion compared to a single consumer setup. Kafka facilitates this efficient processing.</li></ul><ul id="ecdc6c90-b059-48df-bf83-df894cf4d90c" class="bulleted-list"><li style="list-style-type:disc">I&#x27;ve opted for a Redis cluster to handle large volumes of data efficiently. Redis cluster enables me to manage millions of data points effectively. In this application, Redis is utilized for storing user information, access tokens, refresh tokens, and authentication tokens. Additionally, Redis cluster is used to cache database queries for future use</li></ul><ul id="d533ce4c-4941-4963-8b88-eca26cf1a328" class="bulleted-list"><li style="list-style-type:disc">I&#x27;ve incorporated an event-driven mechanism in my API to expedite processing and ensure faster response times. Throughout the code, whenever events are required, they are leveraged to optimize performance.</li></ul><p id="671c7233-4152-4356-8f8d-15227f9012c9" class="">
+</p><h2 id="8564dc23-ac87-4fbb-aa3e-03260417d847" class="">Application Workflow with API:</h2><p id="eb9aae71-b4f3-4a2b-852a-8e6f2676b33e" class=""><em><mark class="highlight-blue"><strong><span style="border-bottom:0.05em solid">Step # 1 ( Sign Up):</span></strong></mark></em></p><p id="50b8f59a-a11a-4457-923b-17678025f965" class="">Initially, users will register by providing their email address and password.</p><p id="6ba8735b-3795-4c85-a7cb-b04d3b5161cd" class=""><em><mark class="highlight-blue"><strong><span style="border-bottom:0.05em solid">Step  # 2 ( Login ):</span></strong></mark></em></p><p id="f7a07f97-bfe8-4a0e-8db8-26b989fa817d" class="">After entering their email and password, users will log in, and upon successful authentication, they will receive an authentication token to navigate the platform.</p><p id="b804cf88-29a2-4d20-a879-64c5731c124e" class=""><em><mark class="highlight-blue"><strong><span style="border-bottom:0.05em solid">Step # 3 ( Authenticate Email With Outlook) :</span></strong></mark></em></p><p id="51c3e4ae-b3c7-42b8-886c-a516b5d47b2a" class="">Upon clicking the button to link their local account with their Outlook account, the system will authenticate the user&#x27;s email. Subsequently, the Outlook authentication page will open for the user to complete the authentication process. After successful authentication, the user will be redirected back to our local website.</p><p id="5f8eb331-0a15-4962-a3d2-371cbdd6de0f" class=""><em><mark class="highlight-blue"><strong><span style="border-bottom:0.05em solid">Step # 4 ( Email Sync Process):</span></strong></mark></em></p><p id="82230845-7441-4821-af1a-9f49fc4bc579" class="">Upon redirection to our page, a sync email call will be initiated, triggering the synchronization of all emails from the user&#x27;s Outlook account to our local database. Once the synchronization is complete, a confirmation message will be received, and all emails will be displayed on the user&#x27;s dashboard.</p><p id="2b165090-614e-49a0-8e69-8066545e2297" class=""><em><mark class="highlight-blue"><strong><span style="border-bottom:0.05em solid">Step # 5 (Mechanism for Real-Time Email Updates and Creation.)</span></strong></mark></em></p><p id="0e0b9452-9702-43c2-9298-b673605505f7" class="">Microsoft provides an API for real-time mechanism where new or updated emails are directed to the API endpoint we&#x27;ve set up.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="3d83666d-eac1-4770-b77e-1200140d78b0" class="code"><code class="language-JavaScript">const subscriptionRequest = {
+                changeType: status,
+                notificationUrl: `${EMAIL_ENVIRONMENT.LOCAL_APP.NGROK_URL}/api/email/${status}`,
+                resource: EMAIL_ENVIRONMENT.MSURL.EMAIL_RESOURCE,
+                expirationDateTime: new Date(Date.now() + 3600000).toISOString(), // 1 hour expiration
+                clientState: JSON.stringify(+userId),
+            };</code></pre><p id="9015fd18-53ad-45c5-82be-cc8cca3a163b" class="">The crucial part lies in configuring the notification URL correctly. Microsoft requires HTTPS URLs, so to achieve this, I utilize ngrok to generate HTTPS URLs. If this setup isn&#x27;t implemented correctly, the real-time mechanism won&#x27;t function as expected.</p><h1 id="b78e9a75-ad54-4837-9287-9a1c48ee1c38" class="">SETUP APPLICATiON</h1><h3 id="f4992830-351a-492d-bbeb-8b763c3c58c9" class=""><strong>GITHUB  REPO URL</strong>: <a href="mailto:git@github.com">git@github.com</a>:tahakhan-dev/core-email-system.git</h3><p id="94f1527e-ecb1-4006-9a11-eeb5a8d2f9bc" class="">Clone this repository and ensure you switch to the <mark class="highlight-red"><strong><span style="border-bottom:0.05em solid">”master”</span></strong></mark> branch, not the main branch.</p><p id="f83747f2-f125-4f4d-9d36-a2f0a215c12f" class="">Project Structure :</p><figure id="b0a4f1ff-11b2-41dc-b82a-4aad0d2f7f56" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled.png"><img style="width:288px" src="Email%20Core%20System%20Documentation%20Images/Untitled.png"/></a></figure><p id="2c76df3b-d641-4996-a2bc-9752c1f8a365" class="">As evident, there are three directories: one for the consumer backend, another for the producer backend, and the last for the frontend. Additionally, multiple docker-compose.yml files are available to facilitate running the application within containers. These compose files handle the installation of dependencies such as PostgreSQL, Kafka, and Redis. With Docker installed, there&#x27;s no need for manual installation of these dependencies</p><p id="23c5152e-bd8c-4937-bda3-73d94ed13029" class="">
+</p><h3 id="1b18712f-106d-475b-92fb-a778f52303cf" class=""><mark class="highlight-orange"><strong>STEP # 1 ( Create Azure account and get credentials)</strong></mark></h3><ul id="aeba4256-dfac-430a-9bd0-079dd08199e9" class="bulleted-list"><li style="list-style-type:disc">To create your Active Directory, navigate to <a href="https://portal.azure.com/#home">portal.azure.com</a>, sign up or log in, and proceed to the Microsoft Azure portal. From there, access the Microsoft Entra ID section, which is now known as Active Directory.</li></ul><figure id="acc4c38e-0f13-4496-ba38-dc48810cbfd6" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%201.png"><img style="width:624px" src="Email%20Core%20System%20Documentation%20Images/Untitled%201.png"/></a></figure><ul id="f03fee0c-e6ac-41e5-872b-6ee5d0dde614" class="bulleted-list"><li style="list-style-type:disc">Navigate to the application registration section to register your application. Under the authentication settings, add the following redirect URL: <a href="http://localhost:3000/api/user/outlook/redirect">http://localhost:3000/api/user/outlook/redirect</a>. This URL will be used to redirect the user after successful authentication. Additionally, select the option for multitenant integration instead of single tenant. Ensure to enable &quot;Allow direct integration with the Microsoft account service (login.live.com)&quot;, as it&#x27;s necessary for integrating with Microsoft account SDKs like Xbox or Bing Ads.</li></ul><figure id="dc5d2a34-7292-43b4-8d86-2c6518eccb5c" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%202.png"><img style="width:1280px" src="Email%20Core%20System%20Documentation%20Images/Untitled%202.png"/></a></figure><figure id="bcd84f09-ff16-42cb-81e6-d8f5ea37e776" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%203.png"><img style="width:2798px" src="Email%20Core%20System%20Documentation%20Images/Untitled%203.png"/></a></figure><figure id="0cb78264-3cb2-4832-84cd-62b0ad118e94" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%204.png"><img style="width:1280px" src="Email%20Core%20System%20Documentation%20Images/Untitled%204.png"/></a></figure><ul id="25ed2fbb-c71c-4523-96ca-e23882c78dad" class="bulleted-list"><li style="list-style-type:disc">Navigate to the API permission section to grant the necessary permissions to your API for it to function properly.</li></ul><figure id="7730a4a0-9e8b-4a23-ab85-a2222084278c" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%205.png"><img style="width:1280px" src="Email%20Core%20System%20Documentation%20Images/Untitled%205.png"/></a></figure><ul id="3998e564-a8a1-4ad7-a59b-d710744643ba" class="bulleted-list"><li style="list-style-type:disc">You will receive the following credentials as depicted in the image.</li></ul><figure id="16fadbaf-0d19-498d-be6a-c6a8dc08c263" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%206.png"><img style="width:1280px" src="Email%20Core%20System%20Documentation%20Images/Untitled%206.png"/></a></figure><p id="8ee8af09-d6d5-4456-8a63-70abbca412e6" class="">Additionally, you will obtain the following API to facilitate email functionality or to acquire your access token.</p><figure id="8d03c1d8-3434-4821-b406-5fcc13a8672a" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%207.png"><img style="width:1690px" src="Email%20Core%20System%20Documentation%20Images/Untitled%207.png"/></a></figure><p id="6a7560d0-2ffe-449e-b171-a77245616e59" class="">
+</p><h3 id="831d11c4-045a-453a-a9b3-dd0b798058b2" class=""><mark class="highlight-orange">Step # 2: (NGROK or Use Domain);</mark></h3><p id="1363f54b-20bc-4deb-b6fe-e0228165c773" class="">To establish a subscription for real-time functionality, you require an HTTPS URL. Therefore, you&#x27;ll need to host your API or purchase a domain to enable HTTPS. As a temporary workaround, we utilize ngrok to address this issue.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7a23b8cc-50a9-4ca4-a676-b06ce2890f9a" class="code"><code class="language-TypeScript">            const subscriptionRequest = {
+                changeType: status,
+                notificationUrl: `${EMAIL_ENVIRONMENT.LOCAL_APP.NGROK_URL}/api/email/${status}`,
+                resource: EMAIL_ENVIRONMENT.MSURL.EMAIL_RESOURCE,
+                expirationDateTime: new Date(Date.now() + 3600000).toISOString(), // 1 hour expiration
+                clientState: JSON.stringify(+userId),
+            };</code></pre><p id="29b5ad11-ab3b-4167-ae3b-bb636cd46166" class="">
+</p><p id="487d5592-ea49-47e0-87cf-24eeb11d7622" class="">Visit the ngrok website at <a href="https://ngrok.com/">https://ngrok.com/</a> and create an account. Once signed up, navigate to the token page at <a href="https://dashboard.ngrok.com/get-started/your-authtoken">https://dashboard.ngrok.com/get-started/your-authtoken</a> to obtain your authentication token. After retrieving your token, if you&#x27;re using Linux or macOS, execute the following command:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ade6849b-8828-40e1-bbf5-efe39d85ecf7" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">ngrok config add-authtoken $YOUR_AUTHTOKEN</code></pre><p id="17583d7b-8113-49c4-917e-4e085a81eed4" class="">Your token will remain secure. Subsequently, run the following command to host your port.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="a8ee48e4-2a4a-4e1d-b9fa-f31537c18b9c" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">ngrok http &lt;port_number&gt;</code></pre><p id="ffe7319c-a3c3-4661-ab2a-96537f2f0779" class="">replace <code>&lt;port_number&gt;</code> with the port you want to expose. This command will create a secure tunnel to your localhost server, allowing external access via a unique ngrok URL.</p><p id="7dec0692-c89b-4bae-bcd2-94f2cac6c8d0" class="">To run ngrok in the background, you need to install pm2 and execute the ngrok URL as a background process.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="6caf0e06-0429-4bbd-a351-860a307a840d" class="code"><code class="language-JavaScript">pm2 start &quot;ngrok http 3001&quot; --name &quot;tunnel&quot;</code></pre><figure id="6b22eee7-3798-4274-9370-7847c0e70fb6" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%208.png"><img style="width:708px" src="Email%20Core%20System%20Documentation%20Images/Untitled%208.png"/></a></figure><p id="2694498b-e407-491a-9585-6ba25bca5c81" class="">
+</p><p id="53bf1c5c-0030-4c79-a92a-5f748f01c078" class="">Navigate to <a href="https://dashboard.ngrok.com/cloud-edge/endpoints">https://dashboard.ngrok.com/cloud-edge/endpoints</a> to find the endpoint URL. This URL is tunneling your port, enabling you to utilize it as the notification URL in Microsoft for real-time API integration.</p><figure id="7e54a768-66a8-43a6-a812-aaa39eeec7eb" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%209.png"><img style="width:2638px" src="Email%20Core%20System%20Documentation%20Images/Untitled%209.png"/></a></figure><figure id="44deebbd-e299-451f-a839-ca3b5c47fa0c" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%2010.png"><img style="width:870px" src="Email%20Core%20System%20Documentation%20Images/Untitled%2010.png"/></a></figure><p id="c7868aee-8a1c-44ac-99b9-44642d45b88e" class="">
+</p><h3 id="3fcd0a2a-f651-4ea5-89d4-ea48d09881db" class=""><mark class="highlight-orange">Step # 3 (Clone project):</mark></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="5d1e8c8f-16c8-4d25-8fa9-e06eea2b9b68" class="code"><code class="language-JavaScript">git clone https://github.com/tahakhan-dev/core-email-system.git</code></pre><h3 id="4ca6be81-1328-45fb-8769-363d11bdc21e" class=""><br/><br/><mark class="highlight-orange">Step # 4  ( Install Docker ):</mark></h3><p id="3a259db6-59be-40e3-ad09-04cdd632525e" class="">Here&#x27;s an article detailing the installation process for Docker and Docker Compose.</p><p id="ebe94339-a769-421c-aca1-42e2ef1205a4" class=""><a href="https://medium.com/@tomer.klein/step-by-step-tutorial-installing-docker-and-docker-compose-on-ubuntu-a98a1b7aaed0">https://medium.com/@tomer.klein/step-by-step-tutorial-installing-docker-and-docker-compose-on-ubuntu-a98a1b7aaed0</a></p><h3 id="cd3e323f-371c-4688-94f4-91570b82e7c2" class=""><mark class="highlight-orange">Step # 5 ( Run multiple  docker-compose.yml file):</mark></h3><p id="c1008221-9a68-432d-bd41-d9ba9d2bdce2" class="">To execute the multiple Docker files, you&#x27;ll require the following command. Remember, refrain from running all docker-compose.yml files simultaneously. Instead, execute them step by step, following the provided instructions.</p><h3 id="9b797888-80b2-44d8-b24a-b22048f15683" class=""><mark class="highlight-orange">Step # 6 ( Run docker-compose.pg.yml)</mark></h3><p id="cf084bcf-77b3-4937-8e47-ae77bc53d227" class="">This docker-compose.pg.yml file will set up a PostgreSQL container and automatically create the necessary databases. To automate this process, I&#x27;ve implemented a shell script.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="33a165b5-de50-447d-891f-f050acb9708c" class="code"><code class="language-JavaScript">docker-compose -f docker-compose.pg.yml up -d</code></pre><p id="19dca5f8-a9e6-4beb-a76c-a05c49d925d2" class="">
+</p><h3 id="0e743eda-1c78-48d2-83ee-e51489c6a11d" class=""><mark class="highlight-orange">Step # 7 ( Run docker-compose.redis.yml)</mark></h3><p id="89fa4681-296b-4d94-8b5e-5246558fdadf" class="">For MacBook users, execute the following command to obtain your IP address:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ae6c8d59-39fd-4a62-a0e6-c28c366c27fe" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">echo &quot;$(route get uninterrupted.tech | grep interface | sed -e &#x27;s/.*: //&#x27; | xargs ipconfig getifaddr)&quot;</code></pre><p id="25ec8341-a689-4461-8470-239fff819052" class="">Now, substitute this IP address in the docker-compose.redis.yml file.</p><figure id="74708f5c-7da0-4ad4-8f01-b298233ef99e" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%2011.png"><img style="width:1854px" src="Email%20Core%20System%20Documentation%20Images/Untitled%2011.png"/></a></figure><p id="ded58533-c597-4b32-b847-e667df78335b" class="">Now, update the IP address with your local IP to enable the cluster to run properly.</p><p id="5efbb702-621c-4874-a5c1-a4ddcc7da909" class="">For Linux users, simply use &quot;localhost&quot; or &quot;127.0.0.1&quot; without the need to add your local IP. This step is only necessary for macOS users and run the following below command.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ac080b9e-dcd1-4482-b1bd-15fa6644b993" class="code"><code class="language-JavaScript">docker-compose -f docker-compose.redis.yml up -d</code></pre><p id="16a9f057-c6d3-4fc9-a86c-51817ff61326" class="">After executing the following command, perform the following steps to verify whether the cluster is running correctly or not.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="5e4e1662-51f8-4d37-ac58-0843c8bec2d2" class="code"><code class="language-JavaScript">redis-cli -c -h 127.0.0.1 -p 6375
+127.0.0.1:6375&gt; CLUSTER NODES
+275c337ffe6073071088bb0706a2536608c03fe9 192.168.1.184:6372@16372 master - 0 1683717016000 3 connected 10923-16383
+0e779e30ce3879ee37b470b299a97d41c0e16779 192.168.1.184:6370@16370 master - 0 1683717018000 1 connected 0-5460
+3e7dc06681938425f71a39a2a7d189b336132e4a 192.168.1.184:6374@16374 slave 0e779e30ce3879ee37b470b299a97d41c0e16779 0 1683717020706 1 connected
+841b05c2890454b345da8380ee63fa41c03fae6b 192.168.1.184:6371@16371 master - 0 1683717020000 2 connected 5461-10922
+44444520eb2bbc346ab4dba9b1c495973399a227 192.168.1.184:6375@16375 myself,slave 841b05c2890454b345da8380ee63fa41c03fae6b 0 1683717017000 2 connected
+8f14d7d1faac0e131d315ee34c0c7fc3836716c9 192.168.1.184:6373@16373 slave 275c337ffe6073071088bb0706a2536608c03fe9 0 1683717019000 3 connected
+
+127.0.0.1:6375&gt; SET key &quot;value&quot;
+-&gt; Redirected to slot [12539] located at 192.168.1.184:6372
+OK</code></pre><p id="e7fae0fe-ce2c-459f-95db-053c7321e189" class="">
+</p><h3 id="ba63a858-c0ac-4750-98b4-def8e64939d6" class=""><mark class="highlight-orange">STEP # 8 ( Run docker-compose.kafka.yml)</mark></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d6f3d9bf-6ece-4914-8828-2143a0d3e6a0" class="code"><code class="language-JavaScript">docker-compose -f docker-compose.kafka.yml up -d</code></pre><p id="29a5ed88-21be-4710-a265-83d56f0acaa9" class="">Once your Kafka container is up, access the Kafka UI by entering <em><mark class="highlight-red"><strong><a href="http://localhost:8080/ui/clusters/local/all-topics">http://localhost:8080/ui/clusters/local/all-topics</a></strong></mark></em> into your browser. Within the UI, <em><mark class="highlight-red"><strong><span style="border-bottom:0.05em solid">create the specified topic with three partitions. Remember, creating a topic with three partitions is essential.</span></strong></mark></em></p><figure id="d484b19e-602d-46da-bee5-ef114a12f528" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%2012.png"><img style="width:624px" src="Email%20Core%20System%20Documentation%20Images/Untitled%2012.png"/></a></figure><p id="ed263cd0-a2ea-42a0-92fe-0438a43bc8f1" class="">Create the specified topics required to run the application.</p><ul id="35a71c69-8ee7-471e-a1fc-5ebc5842a222" class="bulleted-list"><li style="list-style-type:disc">email_ack                                         <mark class="highlight-teal">( 3 partition)</mark></li></ul><ul id="ea3fb060-cf93-44d8-84e3-95404d54f73e" class="bulleted-list"><li style="list-style-type:disc">notify_user_mutate_email              <mark class="highlight-teal">( 3 partition)</mark></li></ul><ul id="2c331a4b-eeb5-4c35-bf69-e184ed3bea69" class="bulleted-list"><li style="list-style-type:disc">sync_email                                        <mark class="highlight-teal">( 3 partition)</mark></li></ul><ul id="e86b468d-ea0b-4fb8-9c63-eff2ec608146" class="bulleted-list"><li style="list-style-type:disc">create_email_subscription_cron    <mark class="highlight-teal">( 3 partition)</mark></li></ul><ul id="8ee7d83a-0c3f-41ec-8e36-a1e4089fbd68" class="bulleted-list"><li style="list-style-type:disc">create_email_subscripiton              <mark class="highlight-teal">( 3 partition)</mark></li></ul><ul id="d01aecb1-3727-4325-a3d0-07e60060cb15" class="bulleted-list"><li style="list-style-type:disc">update_email_subscripiton             <mark class="highlight-teal">( 3 partition)</mark></li></ul><p id="78a3a558-8185-4977-a571-d79372abcf37" class="">
+</p><h3 id="e05736d3-a41a-49c4-89d0-0a90c35a2399" class=""><mark class="highlight-orange">STEP # 9 (Run docker-compose.nest.yml)</mark></h3><p id="93453acc-22a1-4051-a390-5b4c66b64881" class="">Execute the provided command to run the application, including your consumer and producer within containers. Ensure that your environment file matches the specifications outlined in my provided env file. Failure to do so may result in the containers stopping or throwing errors. Monitor the container logs to confirm that the application is running successfully.</p><p id="c9ae7c08-29d4-42dd-bf0d-94ab2c7bb191" class="">core-email-consumer (env)</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="bb20a29c-ba10-4568-9eab-734056aa1237" class="code"><code class="language-JavaScript">PORT=3001
+GLOABAL_API_PREFIX=api/
+APP_VERSION=1
+NODE_ENV=development
+
+
+#----- Database Credential------------------
+DB_HOST=host.docker.internal
+DB_PORT=5433
+DB_USER=tahakhan
+DB_PASSWORD=
+DB_DATABASE=email
+DB_TYPE=postgres
+ENABLE_AUTOMATIC_CREATION=true
+AUTO_LOAD_ENTITIES=true
+
+#--------- ACTIVITY KEY -----------------
+
+ACTIVITY_CASE=activity_case
+
+
+# -------- Redis Credentials--------------------
+CACHE_TYPE=ioredis/cluster
+CACHE_CLUSTER_NODE1_HOST=host.docker.internal
+CACHE_CLUSTER_NODE1_PORT=6370
+
+CACHE_CLUSTER_NODE2_HOST=host.docker.internal
+CACHE_CLUSTER_NODE2_PORT=6371
+
+CACHE_CLUSTER_NODE3_HOST=host.docker.internal
+CACHE_CLUSTER_NODE3_PORT=6373
+
+CACHE_TTL=345600
+CACHE_PASSWORD=&#x27;&#x27;
+
+CACHE_CLOSE_CLIENT=true
+CACHE_READY_LOG=true
+CACHE_ERROR_LOG=true
+
+CACHE_ENABLE_AUTO_PIPELINING=false
+CACHE_ENABLE_OFFLINE_QUEUE=true
+CACHE_READY_CHECK=true
+
+CACHE_CLUSTER_SCALE_READ=slave
+
+#---------- Microsoft Credentials ------------------
+
+CLIENT_ID=you microsoft azure client id
+OBJECT_ID=you microsoft azure object id 
+TENANT_ID=you microsoft azure tenant id 
+CLIENT_SECRET=you microsoft azure client secret
+AUTHORIZATION_URL=https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+REDIRECT_URI=http://localhost:3000/api/user/outlook/redirect
+TOKEN_URL=https://login.microsoftonline.com/common/oauth2/v2.0/token
+CALLBACK_URL=http://localhost:3000/api/user/outlook/redirect
+SCOPE=offline_access User.Read Mail.Read openid email profile https://outlook.office.com/mail.read Mail.ReadWrite Mail.send
+FETCH_EMAIL_API_URL=https://graph.microsoft.com/v1.0/me/messages
+MS_EMAIL_SUBSCRIPTION_URL=https://graph.microsoft.com/v1.0/subscriptions
+MS_GET_EMAIL_BY_ID=https://graph.microsoft.com/v1.0/me/messages/
+MS_EMAIL_RESOURCE=me/mailFolders/inbox/messages
+
+
+
+# ---------Throttler Keys -------------------
+THROTTLER_USER_TTL=600
+THROTTLER_USER_LIMIT=1000
+
+THROTTLER_TTL=600
+THROTTLER_LIMIT=1000
+
+# --------- Kafka Credentials --------------
+
+KAFKA_NAME=ACK_KAFKA
+KAFKA_CLIENT_ID=consumer_email
+KAFKA_GROUP_ID=my_kafka_group
+KAFKA_BROKER_IP=&lt;your local ip&gt;:39092
+KAFKA_TOPIC_SYNC_EMAIL=sync-email
+KAFKA_SYNC_EMAIL_ACK_TOPIC=email_ack
+KAFKA_EMAIL_SUBSCRIPTION_TOPIC=create_email_subscription_cron
+KAFKA_CREATE_EMAIL_SUBSCRIPTION_TOPIC=create_email_subscripiton
+KAFKA_UPDATE_EMAIL_SUBSCRIPTION_TOPIC=update_email_subscripiton
+KAFKA_NOTIFY_MUTATION_EMAIL_TOPIC=notify_user_mutate_email
+
+# ========== LOACAL APP URL ============
+NGROK_URL=https://2a74-119-73-96-136.ngrok-free.app # your domain url to use outlook real-time api
+REFRESH_TOKEN_URL=http://localhost:3000/api/user/outlook/refreshToken?refresh_token
+
+</code></pre><p id="29744f59-5c09-44ad-8d08-f751df5629b5" class="">To run this application, you need to make the following changes:</p><ul id="da731162-5f64-4fa6-8c23-2a794defa5a0" class="bulleted-list"><li style="list-style-type:disc">Replace the Microsoft credentials with your own.</li></ul><ul id="d0377ae0-2402-4d62-aa0d-d4b0cd720304" class="bulleted-list"><li style="list-style-type:disc">Update the Kafka broker IP with your local IP address.</li></ul><p id="a0e8c01c-3a06-43ba-95fd-dfe7a5d49a10" class="">core-email-producer (env):</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="5c6c2f9e-498d-4c62-9de7-b9233552f519" class="code"><code class="language-JavaScript">PORT=3000
+GLOABAL_API_PREFIX=api/
+APP_VERSION=1
+NODE_ENV=development
+
+
+#----- Database Credential------------------
+DB_HOST=host.docker.internal
+DB_PORT=5433
+DB_USER=tahakhan
+DB_PASSWORD=
+DB_DATABASE=email
+DB_TYPE=postgres
+ENABLE_AUTOMATIC_CREATION=true
+AUTO_LOAD_ENTITIES=true
+
+#--------- ACTIVITY KEY -----------------
+
+ACTIVITY_CASE=activity_case
+
+
+# -------- Redis Credentials--------------------
+CACHE_TYPE=ioredis/cluster
+CACHE_CLUSTER_NODE1_HOST=host.docker.internal
+CACHE_CLUSTER_NODE1_PORT=6370
+
+CACHE_CLUSTER_NODE2_HOST=host.docker.internal
+CACHE_CLUSTER_NODE2_PORT=6371
+
+CACHE_CLUSTER_NODE3_HOST=host.docker.internal
+CACHE_CLUSTER_NODE3_PORT=6373
+
+CACHE_TTL=345600
+CACHE_PASSWORD=&#x27;&#x27;
+
+CACHE_CLOSE_CLIENT=true
+CACHE_READY_LOG=true
+CACHE_ERROR_LOG=true
+
+CACHE_ENABLE_AUTO_PIPELINING=false
+CACHE_ENABLE_OFFLINE_QUEUE=true
+CACHE_READY_CHECK=true
+
+CACHE_CLUSTER_SCALE_READ=slave
+
+#---------- Microsoft Credentials ------------------
+
+CLIENT_ID=you microsoft azure client id
+OBJECT_ID=you microsoft azure object id 
+TENANT_ID=you microsoft azure tenant id 
+CLIENT_SECRET=you microsoft azure client secret
+AUTHORIZATION_URL=https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+REDIRECT_URI=http://localhost:3000/api/user/outlook/redirect
+TOKEN_URL=https://login.microsoftonline.com/common/oauth2/v2.0/token
+CALLBACK_URL=http://localhost:3000/api/user/outlook/redirect
+SCOPE=offline_access User.Read Mail.Read openid email profile https://outlook.office.com/mail.read Mail.ReadWrite Mail.send
+FETCH_EMAIL_API_URL=https://graph.microsoft.com/v1.0/me/messages
+
+
+# ---------Throttler Keys -------------------
+THROTTLER_USER_TTL=600
+THROTTLER_USER_LIMIT=1000
+
+THROTTLER_TTL=600
+THROTTLER_LIMIT=1000
+
+# --------- Kafka Credentials --------------
+
+
+KAFKA_CLIENT_ID=my_email_sync
+KAFKA_GROUP_ID=my_kafka_group
+KAFKA_CONSUMER_1_GROUP_ID=email_ack_group
+KAFKA_CONSUMER_2_GROUP_ID=email_ack_group_2
+KAFKA_TOPIC_CONSUMER_1=email_ack
+KAFKA_TOPIC_CONSUMER_2=notify_user_mutate_email
+KAFKA_TOPIC_SYNC_EMAIL=sync_email
+KAFKA_BROKER_IP=&lt;YOUR_LOCAL_IP_ADDRESS&gt;:39092</code></pre><p id="3362882b-ba11-4c84-a440-ae1c9d5f2032" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="aaac9a69-340d-4011-bbb7-674fa3066637" class="code"><code class="language-JavaScript">docker-compose -f docker-compose.nest.yml up -d docker-compose -f docker-compose.nest.yml logs -f</code></pre><p id="28173175-f382-45da-a4e8-96d1cc5327e8" class="">After executing the command above, your application will be running within a container. You can monitor the application&#x27;s logs accordingly.</p><h3 id="7b88f09c-1e05-4080-bcad-3917b559af67" class=""><mark class="highlight-orange">STEP # 10 (Run docker-compose.frontend.yml)</mark></h3><p id="4a8ea257-3995-43ee-82ae-dba163c4e42f" class="">To launch the frontend project in a Docker container, use this command:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="3eb9a1af-f73a-4ac2-b251-d60256b63627" class="code"><code class="language-JavaScript">docker compose -f docker-compose.frontend.yml up --build -d</code></pre><p id="eb284028-0e66-45b1-b4d8-14fe07d41914" class="">After executing the command, access the project by visiting this URL: <a href="http://localhost:4173/">http://localhost:4173</a></p><figure id="93ff564b-1f0b-46b4-a117-8329181e0852" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%2013.png"><img style="width:576px" src="Email%20Core%20System%20Documentation%20Images/Untitled%2013.png"/></a></figure><p id="3b0a130e-7841-48e9-b8fb-04c44ded0ca9" class="">
+</p><h3 id="5205d567-4b0c-43b8-af68-6085ffb3fce3" class=""><mark class="highlight-orange">STEP # 11 Application Workflow via User Interface</mark></h3><p id="6612de43-0c32-43e4-8dd1-e12a6566524b" class="">If you haven&#x27;t registered previously, click the &quot;Sign Up&quot; button and complete the registration process. After registering, enter your credentials to log in to the application. Upon logging in, you will see the following screen:</p><figure id="a3af88d7-7dac-480a-bca5-1e63387c128a" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%2014.png"><img style="width:480px" src="Email%20Core%20System%20Documentation%20Images/Untitled%2014.png"/></a></figure><p id="993efe87-dbc3-4282-8917-9956fb0b0c26" class="">If your local account isn&#x27;t linked to a Microsoft account, you will see a button to initiate the connection. Clicking this button will redirect you to the Microsoft login page, where you can link your Microsoft account to this local one.</p><figure id="9008c2d0-4749-4d96-9b78-e6822a27d8cf" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%2015.png"><img style="width:336px" src="Email%20Core%20System%20Documentation%20Images/Untitled%2015.png"/></a></figure><p id="f4c861bc-2cf4-4b94-a5e4-fc0c919d3de4" class="">After successfully authenticating with your Microsoft account, you will be redirected to a success page that confirms your account has been successfully linked with your Microsoft account.</p><figure id="f26b5598-d09f-48b2-9459-f5bec844ac50" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%2016.png"><img style="width:432px" src="Email%20Core%20System%20Documentation%20Images/Untitled%2016.png"/></a></figure><p id="150aa863-997d-49f7-a0e7-8da14b7aa70f" class="">Click the button to return to the application, and you will notice that your email is beginning to sync.</p><figure id="b49d1dfd-329a-4e59-99c8-d10f19336b74" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%2017.png"><img style="width:576px" src="Email%20Core%20System%20Documentation%20Images/Untitled%2017.png"/></a></figure><p id="048e218b-4fd8-4ff0-9ddf-b1076e545d0f" class="">Once your email has synced, you will see the following screen displaying all your synchronized emails.</p><figure id="6720d50d-74ed-4926-be76-f625569cd8cc" class="image"><a href="Email%20Core%20System%20Documentation%20Images/Untitled%2018.png"><img style="width:708px" src="Email%20Core%20System%20Documentation%20Images/Untitled%2018.png"/></a></figure><p id="665d7280-1c10-4083-b46e-c0dcbc9012a9" class="">
+</p><p id="9c9c7dbb-6fa3-4bbf-a28a-79c2f64c2ef1" class="">This describes the process for setting up your email core system application. By following these steps, you will successfully configure the application.</p><p id="e5ddac18-1d1f-4afa-a6cd-39b60bd496ad" class="">
+</p><p id="b0d4e96a-4b49-4d6b-87f6-09ce24de0a8b" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
