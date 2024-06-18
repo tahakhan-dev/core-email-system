@@ -49,10 +49,10 @@ export class CreateSubscriptionEmailEventHandler implements IEventHandler<Create
                 "deviceId": event.request.headers.deviceid
             }
 
-            this.httpService.axiosRef.post(`http://localhost:3001/api/email/subscription?status=created`, {}, { headers }).then(res => { resolve("true") }).catch(error => {
+            this.httpService.axiosRef.post(`http://host.docker.internal:3001/api/email/subscription?status=created`, {}, { headers }).then(res => { resolve("true") }).catch(error => {
                 resolve("error")
             });
-            this.httpService.axiosRef.post(`http://localhost:3001/api/email/subscription?status=updated`, {}, { headers }).then(res => { resolve("true") }).catch(error => {
+            this.httpService.axiosRef.post(`http://host.docker.internal:3001/api/email/subscription?status=updated`, {}, { headers }).then(res => { resolve("true") }).catch(error => {
                 resolve("error")
             });
 

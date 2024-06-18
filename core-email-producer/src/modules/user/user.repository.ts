@@ -295,7 +295,7 @@ export class UserRepository {
     }
 
     private async syncUserEmail(request: Request): Promise<IUserResponse> {
-        let response: IUserResponse, decryptResponse: IDecryptWrapper, getUserProfile: UserEntity, userRefreshToken;
+        let response: IUserResponse, decryptResponse: IDecryptWrapper, getUserProfile: UserEntity, userRefreshToken, emails = [];
         try {
             decryptResponse = this.tokenFunctionsService.decryptUserToken(request); // decrypting consumer token
             const userId: number = decryptResponse?.id
@@ -336,19 +336,23 @@ export class UserRepository {
 
             }
 
-            const fetchEmailAPIURL = EMAIL_ENVIRONMENT.MSAUTH.FETCH_EMAIL_API_URL
+            let fetchEmailAPIURL = EMAIL_ENVIRONMENT.MSAUTH.FETCH_EMAIL_API_URL
             const headers = {
                 Authorization: `Bearer ${getUserProfile.oAuthEmailToken}`,
             };
 
-            const fetchEmailResponse = await lastValueFrom(this.httpService.get(
-                fetchEmailAPIURL,
-                {
-                    headers
-                }
-            ));
-
-            response = responseHandler(fetchEmailResponse.data.value, "User Email Sync Successfully", Status.SUCCESS, StatusCodes.CREATED)
+            while (fetchEmailAPIURL) {
+                const fetchEmailResponse = await lastValueFrom(this.httpService.get(
+                    fetchEmailAPIURL,
+                    {
+                        headers
+                    }
+                ));
+                const responseData = fetchEmailResponse.data;
+                emails = emails.concat(responseData.value);
+                fetchEmailAPIURL = responseData['@odata.nextLink'] || null; // Get the next link, if available
+            }
+            response = responseHandler(emails, "User Email Sync Successfully", Status.SUCCESS, StatusCodes.CREATED)
 
         } catch (error) {
             response = responseHandler(null, error.message, Status.FAILED, StatusCodes.INTERNAL_SERVER_ERROR)

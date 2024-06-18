@@ -77,7 +77,7 @@ export class EmailRepository {
 
             await this.emailSubscriptionHelper.createSubscription(getAccessTokenResponse?.result?.access_token, userId ?? decryptResponse.id, status);
 
-            response = responseHandler(null, `User Email Create`, Status.SUCCESS, StatusCodes.SUCCESS) // sending response to client
+            response = responseHandler(null, `User Email Subscription Created`, Status.SUCCESS, StatusCodes.SUCCESS) // sending response to client
 
         } catch (error) {
             response = responseHandler(null, error, Status.FAILED, StatusCodes.INTERNAL_SERVER_ERROR)
@@ -185,7 +185,7 @@ export class EmailRepository {
             getAllUserEmail = await this.emailRepository.find({
                 where: { userId },
                 cache: {
-                    id: `${REDIS_CACHE_KEY?.EMAIL.GET_USER_EMAIL_BY_ID}-${userId}`,
+                    id: `${REDIS_CACHE_KEY?.EMAIL.GET_USER_EMAIL_BY_ID}_${userId}`,
                     milliseconds: REDIS_CACHE_KEY?.milliseconds
                 }
             })

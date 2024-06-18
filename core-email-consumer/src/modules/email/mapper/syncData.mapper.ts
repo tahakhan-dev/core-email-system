@@ -28,15 +28,7 @@ export class SyncDataMapper {
     updateEmailDataObj(newUpdateObject: any, oldUpdateObject: any): EmailEntity {
         try {
             const syncData = new EmailEntity();
-            syncData.emailId = newUpdateObject?.id === oldUpdateObject?.id ? oldUpdateObject?.id : newUpdateObject?.id;
-            syncData.hasAttachments = newUpdateObject?.hasAttachments === oldUpdateObject?.hasAttachments ? oldUpdateObject?.hasAttachments : newUpdateObject?.hasAttachments;
-            syncData.body = newUpdateObject?.bodyPreview === oldUpdateObject?.bodyPreview ? oldUpdateObject?.bodyPreview : newUpdateObject?.bodyPreview;
-            syncData.importance = newUpdateObject?.importance === oldUpdateObject?.importance ? oldUpdateObject?.importance : newUpdateObject?.importance;
             syncData.read = newUpdateObject?.isRead === oldUpdateObject?.isRead ? oldUpdateObject?.isRead : newUpdateObject?.isRead;
-            syncData.receivedDateTime = newUpdateObject?.receivedDateTime === oldUpdateObject?.receivedDateTime ? oldUpdateObject?.receivedDateTime : newUpdateObject?.receivedDateTime;
-            syncData.recipient = newUpdateObject?.email === oldUpdateObject?.email ? oldUpdateObject?.email : newUpdateObject?.email;
-            syncData.sender = newUpdateObject?.sender?.emailAddress?.address === oldUpdateObject?.sender?.emailAddress?.address ? oldUpdateObject?.sender?.emailAddress?.address : newUpdateObject?.sender?.emailAddress?.address;
-            syncData.subject = newUpdateObject?.subject === oldUpdateObject?.subject ? oldUpdateObject?.subject : newUpdateObject?.subject;
             return syncData
 
         } catch (error) {

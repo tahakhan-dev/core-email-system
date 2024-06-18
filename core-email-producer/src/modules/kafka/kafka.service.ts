@@ -47,7 +47,6 @@ export class KafkaService implements OnModuleInit, OnModuleDestroy {
             this.consumer2.run({
                 eachMessage: async ({ topic, partition, message }) => {
                     const ackData = JSON.parse(message.value.toString())
-
                     if (ackData?.userId) {
                         let getWebSocketClientData = await this.userCacheService.getWebSocketClientData(+ackData?.userId);
                         if (getWebSocketClientData) {

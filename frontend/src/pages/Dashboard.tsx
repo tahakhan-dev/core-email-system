@@ -72,8 +72,7 @@ const DemoDashboard: React.FC = () => {
     try {
       socket.on("mutateEmail", (message) => {
         let socketUserId = message.userId;
-
-        if (+userId === +socketUserId) {
+        if (+userId == +socketUserId) {
           setUpdateEmailAck(true);
         }
       });

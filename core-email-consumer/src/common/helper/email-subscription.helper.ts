@@ -14,7 +14,6 @@ export class EmailSubscription {  // class related to token
     async createSubscription(token: string, userId: number, status: SubscriptionStatus) {
         try {
             const accessToken = token; // Obtain this token using OAuth2
-        
             if (!accessToken || !userId) throw new InternalServerErrorException("There is some issue please try again later")
 
             const subscriptionRequest = {
@@ -53,8 +52,7 @@ export class EmailSubscription {  // class related to token
                     timeout: 10000 // Increase timeout to 10 seconds
                 }),
             );
-            console.log(response.data,'=====response.data update==============');
-
+            console.log(response.data, '=====response.data update==============');
             return response.data;
         } catch (error) {
             throw new InternalServerErrorException(error.response.data)

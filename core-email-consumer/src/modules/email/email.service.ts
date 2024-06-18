@@ -72,7 +72,6 @@ export class EmailService {
       const userId = value?.userId
 
       let getUserEmailById = await this.emailSubscriptionService.getNewEmailBySubscription(emailId, accessToken);
-
       let getUserEmailByEmailId = await this.emailRepositoryEntity.findOne({ where: { emailId } });
 
       if (!getUserEmailByEmailId) {
@@ -102,9 +101,9 @@ export class EmailService {
       let mapper
 
       let getUserEmailById = await this.emailSubscriptionService.getNewEmailBySubscription(emailId, accessToken);
-      
-      mapper = this.syncDataMapper.syncEmailDataObj(getUserEmailById, { email: getUserEmailById?.toRecipients[0]?.emailAddress.address, userId: userId, });
-      
+
+      mapper = this.syncDataMapper.syncEmailDataObj(getUserEmailById, { email: getUserEmailById?.toRecipients[0]?.emailAddress.address, userId: userId });
+
       await Promise.all([
         this.emailRepositoryEntity.update({ emailId }, mapper),
         this.cacheEmailService.removeKeyFromRedis(`${REDIS_CACHE_KEY?.EMAIL.GET_USER_EMAIL_BY_ID}_${userId}`)

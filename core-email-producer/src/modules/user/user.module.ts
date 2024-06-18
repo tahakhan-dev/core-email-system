@@ -21,7 +21,7 @@ import { Module } from '@nestjs/common';
   imports: [
     HttpModule.registerAsync({
       useFactory: () => ({
-        timeout: 5000,
+        timeout: 15000,
         maxRedirects: 5,
       }),
     }),
