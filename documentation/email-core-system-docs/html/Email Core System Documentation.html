@@ -792,7 +792,7 @@ KAFKA_NOTIFY_MUTATION_EMAIL_TOPIC=notify_user_mutate_email
 
 # ========== LOACAL APP URL ============
 NGROK_URL=https://2a74-119-73-96-136.ngrok-free.app # your domain url to use outlook real-time api
-REFRESH_TOKEN_URL=http://localhost:3000/api/user/outlook/refreshToken?refresh_token
+REFRESH_TOKEN_URL=http://host.docker.internal:3000/api/user/outlook/refreshToken?refresh_token
 
 </code></pre><p id="29744f59-5c09-44ad-8d08-f751df5629b5" class="">To run this application, you need to make the following changes:</p><ul id="da731162-5f64-4fa6-8c23-2a794defa5a0" class="bulleted-list"><li style="list-style-type:disc">Replace the Microsoft credentials with your own.</li></ul><ul id="d0377ae0-2402-4d62-aa0d-d4b0cd720304" class="bulleted-list"><li style="list-style-type:disc">Update the Kafka broker IP with your local IP address.</li></ul><p id="a0e8c01c-3a06-43ba-95fd-dfe7a5d49a10" class="">core-email-producer (env):</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="5c6c2f9e-498d-4c62-9de7-b9233552f519" class="code"><code class="language-JavaScript">PORT=3000
 GLOABAL_API_PREFIX=api/
