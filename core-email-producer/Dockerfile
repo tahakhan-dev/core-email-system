@@ -23,4 +23,5 @@ RUN npm i -g npm@latest; \
 COPY . . 
 
 RUN pnpm run build 
-CMD [ "pnpm", "run", "start" ]
+
+CMD [ "pnpm", "run", "start:prod" ]
