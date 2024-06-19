@@ -296,7 +296,6 @@ const DemoDashboard: React.FC = () => {
             <table className="emails-table">
               <thead>
                 <tr>
-                  <th>User Name</th>
                   <th>Sender</th>
                   <th>Recipient</th>
                   <th>Subject</th>
@@ -310,7 +309,6 @@ const DemoDashboard: React.FC = () => {
               <tbody>
                 {currentEmailData.map((email) => (
                   <tr key={email.id} className={email.read ? "read" : "unread"}>
-                    <td>{email.userName}</td>
                     <td>{email.sender}</td>
                     <td>{email.recipient}</td>
                     <td>{email.subject}</td>
